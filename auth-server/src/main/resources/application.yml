@@ -1,0 +1,31 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: auth
+  datasource:
+    url: jdbc:mysql://localhost/gateway?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          import_files: database.sql
+security:
+  oauth2:
+    client:
+      client-id: auth-api
+      client-secret: a1b2c3
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: localhost
